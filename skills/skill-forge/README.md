@@ -28,7 +28,7 @@ Skill Forge fixes this by teaching you **12 battle-tested techniques** for skill
 ## Install
 
 ```bash
-npx skills add sanyuan0704/sanyuan-skills --path skills/skill-forge
+npx skills add hunghg255/hunghg255-skills --path skills/skill-forge
 ```
 
 ## Usage

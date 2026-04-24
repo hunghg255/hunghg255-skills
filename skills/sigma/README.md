@@ -15,7 +15,7 @@ Compatible with any AI agent terminal: **Claude Code** / **Cursor** / **Trae** /
 ## Installation
 
 ```bash
-npx skills add sanyuan0704/sanyuan-skills --path skills/sigma
+npx skills add hunghg255/hunghg255-skills --path skills/sigma
 ```
 
 ## Features
