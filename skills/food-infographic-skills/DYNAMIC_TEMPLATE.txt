@@ -1,0 +1,17 @@
+
+Create a hyper-realistic food infographic photograph of Vietnamese {dish_name}.
+
+A beautifully plated authentic Vietnamese {dish_name} is anchored at the bottom center of the composition.
+
+Floating ingredients levitating vertically include:
+{ingredients_block}
+
+Each ingredient is motion-frozen mid-air with realistic particles, splashes, crumbs, smoke, and textures.
+
+Thin white pointing lines connect every floating ingredient to clear Vietnamese text labels in elegant editorial infographic style.
+
+Rustic wooden table surface, dark moody background, cinematic lighting, volumetric smoke, shallow depth of field, DSLR photography, ultra detailed food textures, appetizing warm tones, premium restaurant advertisement style, 8K ultra-realistic, highly detailed, studio food photography.
+
+Vertical composition, symmetrical layout, luxury magazine infographic aesthetic.
+
+--ar 2:3
