@@ -20,6 +20,8 @@ When the user only provides a dish name:
    - Sauces
    - Toppings
    - Texture elements
+   - Add the dish name in the center of the top photo and make it stand out with a bold font and vibrant color
+   - Important: all text must use font vietnamese(Vn/UTM/SVN/UVF) for ingredient labels
 4. Build a cinematic editorial infographic prompt automatically
 
 The output must:
