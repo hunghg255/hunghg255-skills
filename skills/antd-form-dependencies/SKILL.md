@@ -96,6 +96,128 @@ const SelectDistrict = (props) => {
 
 No wrapper needed — the component watches its own dependency.
 
+## Custom Form Field Components — Complete Guide
+
+When creating custom form field components for file uploads or complex inputs, follow this pattern:
+
+### Custom Field Component Structure
+
+```tsx
+type CustomUploadFieldProps = {
+  value?: string;
+  onChange?: (value: string) => void;
+  disabled?: boolean;
+};
+
+function CustomUploadField({ value, onChange, disabled }: CustomUploadFieldProps) {
+  const [uploading, setUploading] = useState(false);
+  // IMPORTANT: Local preview state must sync with form value
+  const [preview, setPreview] = useState<string | undefined>(value);
+
+  // CRITICAL: Sync local preview when form value changes (e.g., when editing)
+  useEffect(() => {
+    setPreview(value);
+  }, [value]);
+
+  const handleUpload = async (file: File) => {
+    try {
+      setUploading(true);
+      const url = await uploadFile(file);
+      setPreview(url);
+      onChange?.(url); // Notify form of value change
+      message.success('Upload successful');
+    } catch {
+      message.error('Upload failed');
+    } finally {
+      setUploading(false);
+    }
+    return false;
+  };
+
+  const handleRemove = () => {
+    setPreview(undefined);
+    onChange?.(''); // Notify form of empty value
+  };
+
+  // Render preview or upload area based on preview state
+  if (preview) {
+    return (
+      <div>
+        {/* Preview UI with remove button */}
+        <Button onClick={handleRemove} disabled={disabled}>Remove</Button>
+      </div>
+    );
+  }
+
+  return (
+    <Upload.Dragger beforeUpload={handleUpload} disabled={uploading || disabled}>
+      {/* Upload UI */}
+    </Upload.Dragger>
+  );
+}
+```
+
+### Using Custom Field in Form
+
+```tsx
+function MyForm() {
+  const [form] = Form.useForm();
+
+  const handleSubmit = async (values) => {
+    // CRITICAL: Always use values from form, NOT from local state
+    await api.submit({
+      url: values.url,              // From form values
+      thumbnail_url: values.thumbnail_url,  // From form values - NOT from state
+    });
+  };
+
+  return (
+    <Form form={form} onFinish={handleSubmit}>
+      <Form.Item name="url" label="Video">
+        <VideoUploadField />
+      </Form.Item>
+
+      <Form.Item name="thumbnail_url" label="Thumbnail">
+        <ThumbnailUploadField />
+      </Form.Item>
+    </Form>
+  );
+}
+```
+
+### CRITICAL Rules for Custom Form Fields
+
+1. **ALWAYS use form values in submit handler** - NEVER use local component state when submitting:
+   ```tsx
+   // ❌ WRONG - Using state
+   thumbnail_url: thumbnailPreview,
+
+   // ✅ CORRECT - Using form values
+   thumbnail_url: values.thumbnail_url,
+   ```
+
+2. **ALWAYS sync local preview with form value via useEffect**:
+   ```tsx
+   useEffect(() => {
+     setPreview(value);
+   }, [value]);
+   ```
+
+3. **ALWAYS call onChange when value changes** (upload/remove):
+   ```tsx
+   onChange?.(url);    // When uploading
+   onChange?.('');     // When removing
+   ```
+
+4. **ALWAYS reset form when modal closes** to prevent stale values:
+   ```tsx
+   useEffect(() => {
+     if (!open) {
+       form.resetFields();
+     }
+   }, [open, form]);
+   ```
+
 ## Step 3: Add Reset Logic ⚠️ REQUIRED
 
 When a parent field changes, ALL downstream fields MUST be reset. This is the Iron Law.
@@ -131,11 +253,21 @@ Check these before delivering:
 
 ## Pre-Delivery Checklist
 
+### For Dependencies (Cascading Fields)
 - [ ] Dependent fields reset when parent changes (Iron Law satisfied)
 - [ ] Correct pattern chosen based on dependency ownership
 - [ ] `noStyle` present on wrapper `Form.Item` (dependencies/shouldUpdate patterns)
-- [ ] Custom components inside `Form.Item` accept and forward `value` + `onChange`
 - [ ] No `shouldUpdate={true}` without explicit performance justification
 - [ ] `Form.useWatch` only used inside components rendered within `<Form>`
 
-**IMPORTANT**: Always use custom components with form.item because it's the best and most practical method; only use formwatch if that doesn't work. If you want to use Form.Watch, please ask me first so I can review it.
+### For Custom Upload Field Components
+- [ ] Custom component accepts and forwards `value` + `onChange` props
+- [ ] Local `preview` state syncs with `value` via `useEffect`
+- [ ] `onChange(url)` called when upload succeeds
+- [ ] `onChange('')` called when file is removed
+- [ ] Submit handler uses `values.fieldName` NOT local component state
+- [ ] Form `resetFields()` called when modal closes
+
+**IMPORTANT**:
+1. Always use custom components with Form.Item because it's the best and most practical method; only use Form.useWatch if that doesn't work.
+2. When submitting forms with custom fields, ALWAYS use values from the form (e.g., `values.thumbnail_url`) NEVER use local component state (e.g., `thumbnailPreview`).
