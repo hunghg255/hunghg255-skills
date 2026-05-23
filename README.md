@@ -3,7 +3,7 @@
 A collection of production-grade agent skills for Claude Code and other AI agent terminals.
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Skills-9-blue" alt="9 Skills" />
+  <img src="https://img.shields.io/badge/Skills-11-blue" alt="11 Skills" />
   <img src="https://img.shields.io/badge/License-MIT-yellow" alt="MIT License" />
 </p>
 
@@ -11,7 +11,9 @@ A collection of production-grade agent skills for Claude Code and other AI agent
 
 | Skill | Description | Install |
 |-------|-------------|---------|
+| [**Antd Form Dependencies**](./skills/antd-form-dependencies/) | Ant Design Form dependency patterns — dependencies, shouldUpdate, Form.useWatch, cascading selects | `npx skills add hunghg255/hunghg255-skills --path skills/antd-form-dependencies` |
 | [**Code Review Expert**](./skills/code-review-expert/) | Senior engineer code review covering SOLID, security, performance, error handling | `npx skills add hunghg255/hunghg255-skills --path skills/code-review-expert` |
+| [**Humanizer**](./skills/humanizer/) | Skill | `npx skills add hunghg255/hunghg255-skills --path skills/humanizer` |
 | [**Diagram Design**](./skills/diagram-design/) | Create technical and product diagrams — architecture, flowchart, sequence, state machine, ER/data model, timeline, swimlane, and more — as standalone HTML files with inline SVG | `npx skills add hunghg255/hunghg255-skills --path skills/diagram-design` |
 | [**Food Infographic**](./skills/food-infographic-skills/) | Create cinematic editorial infographic prompts for dishes with hyper-realistic food photography style | `npx skills add hunghg255/hunghg255-skills --path skills/food-infographic-skills` |
 | [**Food Infographic (No Text)**](./skills/food-infographic-no-text-skills/) | Variant of food infographic without text overlays | `npx skills add hunghg255/hunghg255-skills --path skills/food-infographic-no-text-skills` |
