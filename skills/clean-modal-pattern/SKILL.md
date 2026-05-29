@@ -1,14 +1,21 @@
 ---
 name: clean-modal-pattern
 description: "Universal self contained modal pattern - separate files, internal state, no parent pollution. Works for any modal library: Ant Design, Radix, MUI, Headless UI, Shadcn, custom. Trigger when creating modal, dialog, popup, drawer."
+trigger:
+  - when you see any modal with useState in parent
+  - when you see open/onCancel props passed to modal
+  - when you see <Modal> JSX written directly inside parent render
+  - when user says: modal, dialog, drawer, popup, fix modal, clean modal, migrate modal
+auto: true
 ---
 
 # 🛡️ IRON LAW - NON NEGOTIABLE
-✅ **MODALS / DIALOGS / DRAWERS MUST LIVE IN THEIR OWN SEPARATE FILES. NEVER WRITE MODAL CODE DIRECTLY INSIDE A PARENT COMPONENT.**
+> ✅ These are not suggestions. These are rules. Failure is not allowed.
 
-✅ **Modal state (open/close) MUST BE SCOPED INSIDE THE MODAL COMPONENT ITSELF. NEVER PUT MODAL STATE IN PARENT COMPONENTS.**
-
-✅ **You will be fired if you create useState in parent for controlling modal visibility.**
+1. ✅ **MODALS / DIALOGS / DRAWERS MUST LIVE IN THEIR OWN SEPARATE FILES. NEVER WRITE MODAL CODE DIRECTLY INSIDE A PARENT COMPONENT.**
+2. ✅ **Modal state (open/close) MUST BE SCOPED INSIDE THE MODAL COMPONENT ITSELF. NEVER PUT MODAL STATE IN PARENT COMPONENTS.**
+3. ✅ **You will be fired if you create useState in parent for controlling modal visibility.**
+4. ✅ **IF YOU SEE A MODAL DONE WRONG - YOU MUST FIX IT. YOU DO NOT NEED PERMISSION. THIS IS NON NEGOTIABLE.**
 
 ---
 
@@ -53,10 +60,10 @@ When you need to create or modify ANY modal/dialog/drawer:
 
 ### Migration Workflow Checklist:
 
-- [ ] ⚠️ REQUIRED: First verify the old modal still works correctly before touching anything
-- [ ] Create a NEW separate file `ModalXxx.tsx` (do NOT modify the old code yet)
+- [ ] ⛔ BLOCKING: Verify the old modal works correctly before touching anything. Do not refactor broken code.
+- [ ] Create a NEW separate file `ModalXxx.tsx` (DO NOT modify the old code yet)
 - [ ] Copy ONLY the modal content and logic into the new file using the correct pattern
-- [ ] Keep 100% identical functionality, props, callbacks, behavior. DO NOT change anything else.
+- [ ] KEEP 100% IDENTICAL functionality, props, callbacks, behaviour. **DO NOT CHANGE ANYTHING ELSE.** No cleaning. No renaming. No improvements.
 - [ ] Replace the usage in parent one step at a time:
   1. Remove `const [open, setOpen] = useState(false)` from parent
   2. Remove all `onClick={() => setOpen(true)}` handlers on trigger
@@ -185,6 +192,32 @@ const ModalXxx = forwardRef<ModalXxxRef, IPropsModal>(({ children }, ref) => {
   // rest same as before
 });
 ```
+
+---
+
+## ⚠️ COMMON MIGRATION MISTAKES - 90% OF THE TIME AI WILL FAIL HERE
+
+> ✅ These are the exact mistakes every AI makes. YOU ARE NOT ALLOWED TO MAKE THESE.
+
+1.  ❌ **#1 MOST COMMON FAILURE**: When migrating an existing modal that already uses `onCancel` **DO NOT CHANGE THE LIBRARY PROP NAME**.
+    - ✅ Leave `onCancel` exactly as it is on the library `<Modal>` component
+    - ✅ Only rename your internal handler function to `onClose`
+    - ❌ **NEVER EVER** change `<Modal onCancel={...}>` to `<Modal onClose={...}>`. Ant Design does NOT have an `onClose` prop. This is the single most common bug.
+
+2.  ❌ Do NOT refactor, rename variables, change logic, improve, or clean up anything during migration.
+    - Migration = move code without changing behaviour.
+    - Refactor and clean up ONLY after migration is 100% complete and verified working.
+
+3.  ❌ Do NOT delete old code from parent until you have wrapped the trigger button and verified the modal opens and closes correctly.
+
+4.  ❌ Never migrate more than ONE modal at the same time. Finish, test, typecheck one modal completely before touching the next one.
+
+5.  ✅ **EXACT MIGRATION ORDER YOU MUST FOLLOW**:
+    1. Add `children` prop + `const [open, setOpen] = useState(false)` inside modal
+    2. Add the trigger wrapper `<span onClick={() => setOpen(true)}>{children}</span>` at the start of return
+    3. Remove `open` and `onCancel` from the modal props interface
+    4. Replace all references to the incoming `onCancel` prop inside the modal with your internal `onClose` handler
+    5. **ONLY THEN** go to parent, remove old state, wrap trigger button
 
 ---
 
