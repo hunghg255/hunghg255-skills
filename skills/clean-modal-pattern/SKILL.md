@@ -41,7 +41,6 @@ When you need to create or modify ANY modal/dialog/drawer:
 - [ ] ⛔ BLOCKING: Create a NEW separate file for this modal. Name it `ModalXxx.tsx` / `DialogXxx.tsx` / `DrawerXxx.tsx`
 - [ ] ⚠️ REQUIRED: Define all modal state **INSIDE THIS FILE ONLY**
   - `const [open, setOpen] = useState(false)` lives here
-  - onOpen / onClose functions live here
   - No useState in parent. Ever.
 - [ ] Expose trigger element via `children` prop
 - [ ] Render BOTH trigger element AND modal component together in the same return
@@ -101,18 +100,15 @@ const ModalXxx = ({ children, ...rest }: IPropsModal) => {
   // ✅ THIS IS THE ONLY PLACE MODAL STATE EXISTS
   const [open, setOpen] = useState(false);
 
-  const onOpen = () => setOpen(true);
-  const onClose = () => setOpen(false);
-
   return (
     <>
       {/* ✅ Trigger element passed via children */}
-      <span onClick={onOpen}>{children}</span>
+      <span onClick={() => setOpen(true)}>{children}</span>
 
       {/* INSERT ANY MODAL COMPONENT HERE FROM ANY LIBRARY, The open, onClose props depend on the library */}
       <Modal
         open={open}
-        onClose={onClose}
+        onClose={() => setOpen(false)}
         {...rest}
       >
         {/* Modal content goes here */}
@@ -201,7 +197,6 @@ const ModalXxx = forwardRef<ModalXxxRef, IPropsModal>(({ children }, ref) => {
 
 1.  ❌ **#1 MOST COMMON FAILURE**: When migrating an existing modal that already uses `onCancel` **DO NOT CHANGE THE LIBRARY PROP NAME**.
     - ✅ Leave `onCancel` exactly as it is on the library `<Modal>` component
-    - ✅ Only rename your internal handler function to `onClose`
     - ❌ **NEVER EVER** change `<Modal onCancel={...}>` to `<Modal onClose={...}>`. Ant Design does NOT have an `onClose` prop. This is the single most common bug.
     - The open, onClose props depend on the library you use. Follow the library docs for the correct prop names. Do not rename them.
 
@@ -217,7 +212,7 @@ const ModalXxx = forwardRef<ModalXxxRef, IPropsModal>(({ children }, ref) => {
     1. Add `children` prop + `const [open, setOpen] = useState(false)` inside modal
     2. Add the trigger wrapper `<span onClick={() => setOpen(true)}>{children}</span>` at the start of return
     3. Remove `open` and `onCancel` from the modal props interface
-    4. Replace all references to the incoming `onCancel` prop inside the modal with your internal `onClose` handler, The open, onClose props depend on the library you use. Follow the library docs for the correct prop names. Do not rename them.
+    4. The open, onClose props depend on the library you use. Follow the library docs for the correct prop names. Do not rename them.
     5. **ONLY THEN** go to parent, remove old state, wrap trigger button
 
 ---
