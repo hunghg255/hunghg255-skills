@@ -109,7 +109,7 @@ const ModalXxx = ({ children, ...rest }: IPropsModal) => {
       {/* ✅ Trigger element passed via children */}
       <span onClick={onOpen}>{children}</span>
 
-      {/* INSERT ANY MODAL COMPONENT HERE FROM ANY LIBRARY */}
+      {/* INSERT ANY MODAL COMPONENT HERE FROM ANY LIBRARY, The open, onClose props depend on the library */}
       <Modal
         open={open}
         onClose={onClose}
@@ -203,6 +203,7 @@ const ModalXxx = forwardRef<ModalXxxRef, IPropsModal>(({ children }, ref) => {
     - ✅ Leave `onCancel` exactly as it is on the library `<Modal>` component
     - ✅ Only rename your internal handler function to `onClose`
     - ❌ **NEVER EVER** change `<Modal onCancel={...}>` to `<Modal onClose={...}>`. Ant Design does NOT have an `onClose` prop. This is the single most common bug.
+    - The open, onClose props depend on the library you use. Follow the library docs for the correct prop names. Do not rename them.
 
 2.  ❌ Do NOT refactor, rename variables, change logic, improve, or clean up anything during migration.
     - Migration = move code without changing behaviour.
@@ -216,7 +217,7 @@ const ModalXxx = forwardRef<ModalXxxRef, IPropsModal>(({ children }, ref) => {
     1. Add `children` prop + `const [open, setOpen] = useState(false)` inside modal
     2. Add the trigger wrapper `<span onClick={() => setOpen(true)}>{children}</span>` at the start of return
     3. Remove `open` and `onCancel` from the modal props interface
-    4. Replace all references to the incoming `onCancel` prop inside the modal with your internal `onClose` handler
+    4. Replace all references to the incoming `onCancel` prop inside the modal with your internal `onClose` handler, The open, onClose props depend on the library you use. Follow the library docs for the correct prop names. Do not rename them.
     5. **ONLY THEN** go to parent, remove old state, wrap trigger button
 
 ---
