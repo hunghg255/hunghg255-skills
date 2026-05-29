@@ -3,7 +3,7 @@
 A collection of production-grade agent skills for Claude Code and other AI agent terminals.
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Skills-12-blue" alt="12 Skills" />
+  <img src="https://img.shields.io/badge/Skills-14-blue" alt="14 Skills" />
   <img src="https://img.shields.io/badge/License-MIT-yellow" alt="MIT License" />
 </p>
 
@@ -11,6 +11,7 @@ A collection of production-grade agent skills for Claude Code and other AI agent
 
 | Skill | Description | Install |
 |-------|-------------|---------|
+| [**ahooks**](./skills/ahooks/) | React Hooks library with over 60+ high-quality reusable hooks for daily use | `npx skills add hunghg255/hunghg255-skills --path skills/ahooks` |
 | [**Antd Form Dependencies**](./skills/antd-form-dependencies/) | Ant Design Form dependency patterns — dependencies, shouldUpdate, Form.useWatch, cascading selects | `npx skills add hunghg255/hunghg255-skills --path skills/antd-form-dependencies` |
 | [**Clean Modal Pattern**](./skills/clean-modal-pattern/) | Universal self-contained modal pattern - no parent state pollution, works with any modal library: Ant Design, Radix, MUI, Shadcn, Headless UI, custom | `npx skills add hunghg255/hunghg255-skills --path skills/clean-modal-pattern` |
 | [**Code Review Expert**](./skills/code-review-expert/) | Senior engineer code review covering SOLID, security, performance, error handling | `npx skills add hunghg255/hunghg255-skills --path skills/code-review-expert` |
@@ -34,6 +35,7 @@ npx skills add hunghg255/hunghg255-skills --path skills/<skill-name>
 Then invoke in your agent terminal:
 
 ```bash
+/ahooks                     # React hooks reference and patterns
 /antd-form-dependencies    # Ant Design form dependency patterns
 /clean-modal-pattern        # Apply clean modal architecture pattern
 /code-review-expert         # Review current git changes
