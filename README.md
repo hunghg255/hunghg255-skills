@@ -3,7 +3,7 @@
 A collection of production-grade agent skills for Claude Code and other AI agent terminals.
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Skills-14-blue" alt="14 Skills" />
+  <img src="https://img.shields.io/badge/Skills-15-blue" alt="15 Skills" />
   <img src="https://img.shields.io/badge/License-MIT-yellow" alt="MIT License" />
 </p>
 
@@ -23,6 +23,9 @@ A collection of production-grade agent skills for Claude Code and other AI agent
 | [**Sigma**](./skills/sigma/) | 1-on-1 AI tutor based on Bloom's 2-Sigma mastery learning with Socratic questioning and adaptive pacing | `npx skills add hunghg255/hunghg255-skills --path skills/sigma` |
 | [**Skill Forge**](./skills/skill-forge/) | Meta-skill for creating high-quality, production-grade skills with battle-tested techniques | `npx skills add hunghg255/hunghg255-skills --path skills/skill-forge` |
 | [**Web Animation Design**](./skills/web-animation-design/) | Design and implement natural, purposeful web animations — easing, timing, springs, transitions, and motion accessibility | `npx skills add hunghg255/hunghg255-skills --path skills/web-animation-design` |
+| [**Create Page**](./skills/create-page/) | Create new pages in Vite projects with react-generate-pages plugin. Auto-detect existing layouts, follows project patterns, automatic filesystem routing | `npx skills add hunghg255/hunghg255-skills --path skills/create-page` |
+| [**React Generate Pages**](./skills/react-generate-pages/) | Automatic filesystem routing for React Router. Setup Vite plugin, configure routes, generate pages from directory structure | `npx skills add hunghg255/hunghg255-skills --path skills/react-generate-pages` |
+| [**Use Zustand**](./skills/use-zustand/) | Enforce Zustand for all global state management. Automatically install, create standard stores, BLOCK React Context API usage | `npx skills add hunghg255/hunghg255-skills --path skills/use-zustand` |
 
 ## Quick Start
 
@@ -39,12 +42,15 @@ Then invoke in your agent terminal:
 /antd-form-dependencies    # Ant Design form dependency patterns
 /clean-modal-pattern        # Apply clean modal architecture pattern
 /code-review-expert         # Review current git changes
+/create-page                # Create new page with automatic routing
 /diagram-design             # Create a technical diagram
 /food-infographic-skills    # Generate a food infographic prompt
 /huashu-design              # Create HTML prototypes or demos
 /karpathy-guidelines        # Apply coding best practices
+/react-generate-pages       # Setup filesystem routing plugin
 /sigma <topic>              # Start a tutoring session
 /skill-forge                # Create a new skill
+/use-zustand                # Global state management with Zustand
 /web-animation-design       # Design web animations
 ```
 
