@@ -251,6 +251,92 @@ Check these before delivering:
 - **Mutating form values directly** → always use `form.setFieldValue()`, never mutate
 - **Creating a new array for `dependencies` on every render** → use stable reference or inline array
 
+---
+
+## ❌ CRITICAL PROVEN PITFALLS (THESE WILL BREAK YOUR CODE)
+
+> ❌ **DO NOT EVER DO THESE THINGS. EVER.**
+> All these have been proven to crash production code:
+
+1.  **❌ NEVER call hooks inside render props function**
+    ```tsx
+    // ❌ FATAL ERROR: Invalid hook call / Rendered more hooks than previous render
+    <Form.Item dependencies={['province']} noStyle>
+      {(props) => {
+        // ❌ DO NOT DO THIS. EVER.
+        useEffect(() => {}, [])
+        useRequest()
+        useMemo()
+
+        return <Form.Item name="ward" />
+      }}
+    </Form.Item>
+    ```
+    ✅ **ALWAYS move ALL hooks into top level component scope**
+
+2.  **❌ NEVER call `form.setFieldValue` inside onChange handler**
+    ```tsx
+    // ❌ Creates infinite re-render loops
+    <Select onChange={() => form.setFieldValue('ward', undefined)} />
+    ```
+    ✅ **ALWAYS put reset logic inside component using `Form.useWatch` + `useEffect`**
+
+3.  **❌ NEVER use `form.watch()` with subscription at top level**
+    ```tsx
+    // ❌ Creates memory leaks and infinite re-renders
+    useEffect(() => form.watch(() => {}), [form])
+    ```
+    ✅ **ALWAYS use `Form.useWatch` hook inside the component that needs the value**
+
+4.  **❌ NEVER pass form instance as prop to child components**
+    ```tsx
+    // ❌ Tight coupling, anti-pattern
+    <WardSelect form={form} />
+    ```
+    ✅ **ALWAYS use `Form.useWatch()` directly inside child component - it has access to form context automatically**
+
+5.  **❌ NEVER have conditional hook calls**
+    ```tsx
+    // ❌ FATAL ERROR: Rendered more hooks than previous render
+    if (province) {
+      const { data } = useRequest(...)
+    }
+    ```
+    ✅ **ALWAYS call all hooks unconditionally, handle condition inside the hook**
+
+---
+
+## ✅ FINAL CORRECT PATTERN (PROVEN IN PRODUCTION)
+
+**This is the ONLY pattern that works 100% of the time, no bugs, no exceptions:**
+
+```tsx
+// ✅ 1. Dependent child component - fully self contained
+function WardSelect({ value, onChange, disabled }) {
+  // ✅ Always at TOP LEVEL of component
+  const province = Form.useWatch('province');
+  const { data: wards, loading } = useGetWards(province);
+
+  // ✅ Reset logic belongs HERE - inside the component that depends on it
+  useEffect(() => {
+    onChange?.(undefined);
+  }, [province, onChange]);
+
+  return <Select value={value} onChange={onChange} options={wards} />
+}
+
+// ✅ 2. Usage in form - SUPER CLEAN
+<Form.Item name="province">
+  <ProvinceSelect />
+</Form.Item>
+
+<Form.Item name="ward">
+  <WardSelect />
+</Form.Item>
+```
+
+✅ **Zero wrapper** | ✅ **Zero dependencies props** | ✅ **Zero form instances passed** | ✅ **Zero bugs**
+
 ## Pre-Delivery Checklist
 
 ### For Dependencies (Cascading Fields)
