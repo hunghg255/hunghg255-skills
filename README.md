@@ -3,7 +3,7 @@
 A collection of production-grade agent skills for Claude Code and other AI agent terminals.
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Skills-15-blue" alt="15 Skills" />
+  <img src="https://img.shields.io/badge/Skills-16-blue" alt="16 Skills" />
   <img src="https://img.shields.io/badge/License-MIT-yellow" alt="MIT License" />
 </p>
 
@@ -25,6 +25,7 @@ A collection of production-grade agent skills for Claude Code and other AI agent
 | [**Web Animation Design**](./skills/web-animation-design/) | Design and implement natural, purposeful web animations — easing, timing, springs, transitions, and motion accessibility | `npx skills add hunghg255/hunghg255-skills --path skills/web-animation-design` |
 | [**Create Page**](./skills/create-page/) | Create new pages in Vite projects with react-generate-pages plugin. Auto-detect existing layouts, follows project patterns, automatic filesystem routing | `npx skills add hunghg255/hunghg255-skills --path skills/create-page` |
 | [**React Generate Pages**](./skills/react-generate-pages/) | Automatic filesystem routing for React Router. Setup Vite plugin, configure routes, generate pages from directory structure | `npx skills add hunghg255/hunghg255-skills --path skills/react-generate-pages` |
+| [**UI Spec**](./skills/ui-spec/) | Generate implementation-ready UI specifications from screenshots or Figma, calibrated to CSS viewport and mapped to the project's real components, tokens, icons, and styles | `npx skills add hunghg255/hunghg255-skills --path skills/ui-spec` |
 | [**Use Zustand**](./skills/use-zustand/) | Enforce Zustand for all global state management. Automatically install, create standard stores, BLOCK React Context API usage | `npx skills add hunghg255/hunghg255-skills --path skills/use-zustand` |
 
 ## Quick Start
@@ -50,6 +51,7 @@ Then invoke in your agent terminal:
 /react-generate-pages       # Setup filesystem routing plugin
 /sigma <topic>              # Start a tutoring session
 /skill-forge                # Create a new skill
+/ui-spec                    # Generate UI spec from screenshot/Figma
 /use-zustand                # Global state management with Zustand
 /web-animation-design       # Design web animations
 ```
