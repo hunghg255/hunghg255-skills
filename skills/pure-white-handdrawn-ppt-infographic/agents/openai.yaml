@@ -1,0 +1,5 @@
+interface:
+  display_name: "Pure White Hand-Drawn PPT Infographic"
+  short_description: "Generate 16:9 PPT infographics with pure white backgrounds, black-gray hand-drawn linework, and pale color labels"
+  icon_large: "./assets/preview.png"
+  default_prompt: "Use $pure-white-handdrawn-ppt-infographic to turn my content into a 16:9 PPT infographic with a pure white background, hand-drawn whiteboard style, pale color labels, and path/flow structure."

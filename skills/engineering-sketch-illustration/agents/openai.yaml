@@ -1,0 +1,8 @@
+interface:
+  display_name: "Engineering Manuscript Illustration"
+  short_description: "Vietnamese explanatory diagrams with white-background blueprint linework and pale watercolor accents"
+  brand_color: "#9BC7D9"
+  default_prompt: "Use $engineering-sketch-illustration to turn a product idea, process, concept, or article point into a Vietnamese 16:9 white-background engineering manuscript illustration with precise blueprint linework, callout annotations, and pale watercolor accents."
+
+policy:
+  allow_implicit_invocation: true

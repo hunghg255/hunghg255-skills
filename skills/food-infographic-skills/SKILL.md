@@ -46,3 +46,5 @@ Note
 add this prompt to last output: "All text must use Inter or Roboto font or font vietnamese(Vn/UTM/SVN/UVF). Render text with full Unicode support. Keep all Vietnamese diacritics attached to their letters (à,á,ạ,ả,ã,â,ầ,ấ,ậ,ẩ,ẫ,ă,ằ,ắ,ặ,ẳ,ẵ,è,é,ẹ,ẻ,ẽ,ê,ề,ế,ệ,ể,ễ,ì,í,ị,ỉ,ĩ,ò,ó,ọ,ỏ,õ,ô,ồ,ố,ộ,ổ,ỗ,ơ,ờ,ớ,ợ,ở,ỡ,ù,ú,ụ,ủ,ũ,ư,ừ,ứ,ự,ử,ữ,ỳ,ý,ỵ,ỷ,ỹ,đ). Do not separate accents from characters. Use advanced text rendering. Preserve all Vietnamese glyphs if exporting to vector. Need to double check font rendering to ensure all Vietnamese characters are correctly displayed with diacritics."
 
 Output ONLY the final image prompt.
+
+Once the final text is output, run this skill using the generated text as input to create the final image. The skill is called: "imagegen".
