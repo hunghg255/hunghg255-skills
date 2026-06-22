@@ -1,0 +1,55 @@
+{
+  "$schema": "https://skills.sh/schemas/skills.sh.schema.json",
+  "notGrouped": "bottom",
+  "groupings": [
+    {
+      "title": "React & State Management",
+      "description": "Skills for building React applications — hooks, forms, routing, modals, and state management.",
+      "skills": [
+        "ahooks",
+        "antd-form-dependencies",
+        "clean-modal-pattern",
+        "create-page",
+        "react-generate-pages",
+        "use-zustand"
+      ]
+    },
+    {
+      "title": "Code Quality & Engineering",
+      "description": "Skills for code review, coding best practices, and meta-skill creation.",
+      "skills": [
+        "code-review-expert",
+        "karpathy-guidelines",
+        "skill-forge"
+      ]
+    },
+    {
+      "title": "Design & Infographics",
+      "description": "Skills for creating diagrams, illustrations, infographics, and visual design assets.",
+      "skills": [
+        "diagram-design",
+        "engineering-sketch-illustration",
+        "food-infographic-skills",
+        "food-infographic-no-text-skills",
+        "huashu-design",
+        "pure-white-handdrawn-ppt-infographic",
+        "vintage-notebook-infographic"
+      ]
+    },
+    {
+      "title": "UI/UX",
+      "description": "Skills for UI specification, design handoff, and web animation implementation.",
+      "skills": [
+        "ui-spec",
+        "web-animation-design"
+      ]
+    },
+    {
+      "title": "Learning & Tutoring",
+      "description": "Skills for personalized learning and AI-powered tutoring sessions.",
+      "skills": [
+        "sigma"
+      ]
+    }
+  ]
+}
