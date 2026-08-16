@@ -1,0 +1,4 @@
+interface:
+  display_name: "Japanese Pop-Tech Logo"
+  short_description: "Create playful Japanese tech wordmark logos"
+  default_prompt: "Use $japanese-pop-tech-logo to design an original Japanese pop-tech wordmark logo for my brand."

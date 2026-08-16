@@ -1,0 +1,4 @@
+interface:
+  display_name: "AI Git Commit"
+  short_description: "Commit AI code with a dedicated bot identity"
+  default_prompt: "Use $ai-git-commit to review, stage, and commit the current AI-generated changes."
